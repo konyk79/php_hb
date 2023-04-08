@@ -90,7 +90,7 @@ class ZoomController extends Controller
             'method' => 'list',
         );
 
-// Setup cURL
+        // Setup cURL
         $ch = curl_init('https://api.zoom.us/v2/rooms/zrlist');
         curl_setopt_array($ch, array(
             CURLOPT_POST => TRUE,
@@ -130,11 +130,11 @@ class ZoomController extends Controller
             CURLOPT_POSTFIELDS => json_encode($postData)
         ));
         dump($ch);
-// Send the request
+        // Send the request
         $response = curl_exec($ch);
-// Check for errors
+        // Check for errors
         if ($response === FALSE) {
-//            trigger_error(curl_error($ch));
+            //            trigger_error(curl_error($ch));
             // die(curl_error($ch));
         }
         return json_decode($response);
@@ -147,7 +147,7 @@ class ZoomController extends Controller
             "last_name" => "Abovian",
             "email" => "barlogy@yahoo.com"
         );
-// Setup cURL
+        // Setup cURL
         $ch = curl_init('https://api.zoom.us/v2/meetings/' . $meetingId . '/registrants');
         curl_setopt_array($ch, array(
             CURLOPT_POST => TRUE,
@@ -201,18 +201,16 @@ class ZoomController extends Controller
             CURLOPT_POSTFIELDS => json_encode($postData)
         ));
         dump(json_encode($postData));
-// Send the request
+        // Send the request
         $response = curl_exec($ch);
 
-// Check for errors
+        // Check for errors
         if ($response === FALSE) {
           //  trigger_error(curl_error($ch));
             // die(curl_error($ch));
             dump('error');
         }
-//        dd(json_decode($response));
         $response =json_decode($response);
-//        dump($response);
         if(!isset($response->id))
             return null;
         return $response ;
@@ -251,8 +249,6 @@ class ZoomController extends Controller
     {
         Subscribe::dailySchedule();
         $timestamp = '2018-01-28 12:04 PM';
-//        $date = Carbon::createFromFormat('Y-m-d H:i A', $timestamp, 'America/New_York');
-//        $date->setTimezone('UTC');
         $dt =  DateTime::createFromFormat('Y-m-d H:i A', $timestamp);
         dump($dt);
         dump($a=$dt->format('d'));
@@ -268,34 +264,6 @@ class ZoomController extends Controller
         dump($a);
         dump($c);
         dd($dt->modify('1 month'));
-
-        //DateTime::createFromFormat('Y-m-d H:i:s',$date->format('Y-m-d H:i:s'));
-//        dd($dt->format('Y-m-d H:i:s'));
-//        dump( $date);
-//        dump($dt);
-        //Log::info(['User Subscribe change status by daily schedule. User Subscription #' => 'wer']);
-//        dump(UserHasSubscribe::find(13)->paidNotificationAction(new DateTime() ,null));
-
-//        dump(Subscribe::first()->groups);
-//        dump(Subscribe::first()->promosName());
-      //  dump(new DateInterval('P2W'));
-//        dump(MainConfig::first()->getLessonBeforeStartTimeout());
-//        dump(Lesson::find(5)->getFirstJoinTime());
-//        dump(UserHasSubscribe::find(1)->getLastActiveHistory()->lesson_histories->count());
-//        dump($this->getUsers());
-//        dump($this->getSubAcounts());
-//        dump($this->getMeetings());
-//        dump($this->getRooms());
-//        dump($this->endConference('e6fba6b2-81ca-444a-8bec-1a2c74815912'));
-//        dump($this->getRegistrantsList('256326420'));
-//        dump($this->addRegistrans('256326420'));
-//        dump($this->getMeeting('477259435'));
-//        if($meeting=$this->addMeeting()){
-//            $id =$meeting->id;
-//            dump($this->getMeeting($id));
-//            dump($this->addRegistrans($id));
-//        }
-//
 
     }
 }

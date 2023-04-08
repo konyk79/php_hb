@@ -149,14 +149,8 @@ class RegisterController extends Controller
                 ->to($registration->email)
                 ->subject(__('emails.beautymail_email_confirmation_subject'));
         });
-//        }
         return back();
     }
 
 
-//    public static function newUserCreation(Request $request, $passwordGenerationRequired, $profile): User
-//    {
-//
-//      //  return $user;
-//    }
 }

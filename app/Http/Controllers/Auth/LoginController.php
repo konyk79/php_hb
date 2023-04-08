@@ -63,33 +63,6 @@ class LoginController extends Controller
     }
 
 
-
-//    public function login(Request $request)
-//    {
-//
-//
-//       $this->validateLogin($request);
-////        $request->session()->set('timezone',$request->timezone);
-//        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-//        // the login attempts for this application. We'll key this by the username and
-//        // the IP address of the client making these requests into this application.
-//        if ($this->hasTooManyLoginAttempts($request)) {
-//            $this->fireLockoutEvent($request);
-//
-//            return $this->sendLockoutResponse($request);
-//        }
-//
-//        if ($this->attemptLogin($request)) {
-//            return $this->sendLoginResponse($request);
-//        }
-//
-//        // If the login attempt was unsuccessful we will increment the number of attempts
-//        // to login and redirect the user back to the login form. Of course, when this
-//        // user surpasses their maximum number of attempts they will get locked out.
-//        $this->incrementLoginAttempts($request);
-//
-//        return $this->sendFailedLoginResponse($request);
-//    }
     /**
      * Obtain the user information from GitHub.
      *
@@ -98,11 +71,6 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
 
-//        if($user = Socialite::driver('facebook')->user()){
-//
-//        }else{
-//            return 'something went wrong';
-//        }
         try {
             $user = Socialite::driver('facebook')->fields([
                 'first_name', 'last_name', 'email', 'locale' //'gender'
@@ -110,7 +78,6 @@ class LoginController extends Controller
         } catch (Exception $e) {
             return dd('OAUTH error'.$e);//redirect()->route('user.index');
         }
-//        dd($user);
         $authUser = $this->findOrCreateUser($user);
 
         Auth::login($authUser, true);
@@ -125,11 +92,8 @@ class LoginController extends Controller
             $user_email=$user->email;
             $this->guard()->logout();
             $request->session()->invalidate();
-            //redirect on email confirmation page when offer to confirm email
-            // return view('frontend.auth.email_confirmation.email_confirmation',compact('user_id','user_email'));
             return redirect(url('/unconfirmed-email'));
         }
-//        dd($request->timezone);
             Session::put('timezone',$request->timezone);
             Session::put('timezone_offset',$request->timezone_offset);
         // email_confirmation-----}
